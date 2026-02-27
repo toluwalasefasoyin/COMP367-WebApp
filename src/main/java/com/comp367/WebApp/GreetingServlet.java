@@ -3,11 +3,12 @@ package com.comp367.WebApp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalTime;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/greet")
 public class GreetingServlet extends HttpServlet {
@@ -18,29 +19,24 @@ public class GreetingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Set content type to HTML
+        // Set content type
         response.setContentType("text/html");
 
-        // Get writer to output HTML
-        PrintWriter out = response.getWriter();
+        // Get current hour
+        int hour = LocalTime.now().getHour();
 
-        // Get current time
-        LocalTime now = LocalTime.now();
-
-        // Determine greeting based on hour
         String greeting;
-        if (now.getHour() < 12) {
-            greeting = "Good morning, YourName, Welcome to COMP367";
+        if (hour < 12) {
+            greeting = "Good morning, Toluwalase, Welcome to COMP367!";
         } else {
-            greeting = "Good afternoon, YourName, Welcome to COMP367";
+            greeting = "Good afternoon, Toluwalase, Welcome to COMP367!";
         }
 
-        // Output greeting
-        out.println("<html>");
-        out.println("<head><title>Greeting</title></head>");
-        out.println("<body>");
+        // Print the greeting
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
         out.println("<h1>" + greeting + "</h1>");
-        out.println("</body>");
-        out.println("</html>");
+        out.println("</body></html>");
+        out.close();
     }
 }
